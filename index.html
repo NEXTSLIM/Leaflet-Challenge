@@ -1,0 +1,261 @@
+<!--
+=========================================================
+* Renzo Dashboard 2 - v2.0.1
+=========================================================
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!doctype html>
+<html lang="en">
+  <style>
+    #map {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: #333;
+  }
+</style>
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    EARTHQUAKE DATA WORLDWIDE
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- CSS Files -->
+  <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="./assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/d3Style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Sanchez" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+
+  <!-- Icons -->
+  <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="static/css/leaflet.extra-markers.min.css">
+
+ <!-- Leaflet CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+
+
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+      <div class="logo">
+        <a href="https://nextslim.github.io/RenzOnly/" class="simple-text logo-mini">
+          <div class="logo-image-small">
+            <img src="./assets/img/logo-small.png">
+          </div>
+          <!-- <p>CT</p> -->
+        </a>
+        <a href="https://nextslim.github.io/RenzOnly/" class="simple-text logo-normal">
+          RENZONLY
+          <!-- <div class="logo-image-big">
+            <img src="../assets/img/logo-big.png">
+          </div> -->
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="active ">
+            <a href="#">
+              <i class="nc-icon nc-tv-2"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://nextslim.github.io/D3-Challenge/">
+              <i class="nc-icon nc-badge"></i>
+              <p>U.S. Census</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://nextslim.github.io/Plotly-Belly-Button/">
+              <i class="nc-icon nc-layout-11"></i>
+              <p>Biodiversity</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://nextslim.github.io/Javascript-Challenge/">
+              <i class="nc-icon nc-planet"></i>
+              <p>UFO Sighting</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/NEXTSLIM/Web-Scraping-Challenge">
+              <i class="nc-icon nc-spaceship"></i>
+              <p>Mission Mars</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://public.flourish.studio/visualisation/6055921/">
+              <i class="nc-icon nc-note-03"></i>
+              <p>Music Sales</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://nextslim.github.io/Web-Design-Challenge/">
+              <i class="nc-icon nc-sun-fog-29"></i>
+              <p>Latitude</p>
+            </a>
+          </li>
+                   </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="javascript:;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EARTHQUAKE DATA WORLDWIDE</a>
+            <p>  ▌The USGS provides earthquake data in a number of different formats, updated every 5 minutes. </p>
+          </div>
+          
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <!-- Content -->
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+           <div class="card card-stats">
+              <div class="card-body ">
+                 <div class="row">
+                  <div class="col-xs-12  col-md-9"> 
+                    <div id="map"style="width: 1121.2px; height: 410px; position: relative; outline: none;" >
+                      <!-- We append our map here. -->
+                    </div>
+                    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+                    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+                    crossorigin=""/>
+                  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+                    integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+                    crossorigin=""></script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                          
+              
+            </div>
+          </div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title">&nbsp;&nbsp;&nbsp;&nbsp;Highlights:</h5>
+                <p class="card-category">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map using Leaflet that plots all of the earthquakes from your data set based on their longitude and latitude</p>
+              </div>
+              <div class="card-body ">
+               
+                <ul>The United States Geological Survey, or USGS for short! The USGS is responsible for providing scientific data about natural hazards, 
+                  the health of our ecosystems and environment; and the impacts of climate and land-use change.
+                   Their scientists develop new methods and tools to supply timely, relevant, and useful information about the Earth and its processes. 
+                </ul>
+                <ul>In thi case the World Map show us the location and magnitude of earthquakes from past 30 Days. </ul>
+                <ul>Include popups that provide additional information about the earthquake when a marker is clicked. </ul>
+                <ul>MORE INFO:</ul><a href="http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" rel="nofollow noreferrer noopener" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbspUSGS GeoJSON Feed</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end Highlights -->
+
+            
+<!-- Footer -->
+<hr>
+
+       <footer class="container d-md-flex py-4">
+        <div class="fme-md-auto text-center text-md-start">
+          <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <div class="social-links text-center text-md-right pt-3 pt-md-0">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <!-- <a href="https://www.facebook.com/RenzoOnly" class="tm-social-link"><i class="fa fa-facebook"></i></a>
+              <a href="https://www.instagram.com/renzoonly/" class="tm-social-link"><i class="fa fa-instagram"></i></a>
+              <a href="https://twitter.com/RenzoOnly" class="tm-social-link"><i class="fa fa-twitter"></i></a>
+              <a href="https://github.com/NEXTSLIM/"i class="fa fa-github" style="font-size:36px"></i></a> -->
+            </div>
+            <br>
+            </nav>
+            
+            <div class="credits">
+              <span class="copyright"> &nbsp;
+                &copy; Copyright <strong><span>RenzOnly</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+       Designed by <a href="https://github.com/NEXTSLIM/">NEXTSLIM</a>
+      </div>
+                
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer> -->
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  
+
+<!-- D3 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
+
+<!-- MomentJS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+
+<!-- Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+crossorigin=""></script>
+
+<!-- Icons -->
+<script src="static/js/leaflet.extra-markers.min.js"></script>
+
+<!-- polyfill.io is library for using newer JavaScript features in older browers (such as Object.assign) -->
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+
+<!-- API Key -->
+<script type="text/javascript" src="static/js/config.js"></script>
+
+<!-- Our JavaScript -->
+<script type="text/javascript" src="static/js/logic.js"></script>
+<script src="static/js/L.CanvasLayer.js"></script>
+</body>
+
+</html>
